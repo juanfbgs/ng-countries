@@ -24,7 +24,8 @@ export class CountryList {
       .pipe(takeUntilDestroyed())
       .subscribe({
         next: (data) => {
-          this.countries.set(data);
+          const sortedCountries = data.sort((a, b) => a.name.common.localeCompare(b.name.common));
+          this.countries.set(sortedCountries);
           this.isLoading.set(false);
         },
         error: (err) => {
